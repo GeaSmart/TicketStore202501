@@ -16,7 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MusicStore.Dto\MusicStore.Dto.csproj" />
     <ProjectReference Include="..\MusicStore.Persistence\MusicStore.Persistence.csproj" />
+    <ProjectReference Include="..\MusicStore.Repositories\MusicStore.Repositories\MusicStore.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

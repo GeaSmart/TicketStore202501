@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Entities", "src\MusicStore.Entities\MusicStore.Entities.csproj", "{DB0F4FBB-B02A-483A-954A-7743CE80D562}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Persistence", "src\MusicStore.Persistence\MusicStore.Persistence.csproj", "{BA868D25-3BF1-4A5D-A09A-DFD4976A99D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Repositories", "src\MusicStore.Repositories\MusicStore.Repositories\MusicStore.Repositories.csproj", "{DE2EA714-81E5-4B79-8D34-889AAF623528}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Dto", "src\MusicStore.Dto\MusicStore.Dto.csproj", "{915E8969-A93C-4F1B-B9A7-658DEC2DEF91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,14 @@ Global
 		{BA868D25-3BF1-4A5D-A09A-DFD4976A99D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA868D25-3BF1-4A5D-A09A-DFD4976A99D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA868D25-3BF1-4A5D-A09A-DFD4976A99D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE2EA714-81E5-4B79-8D34-889AAF623528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE2EA714-81E5-4B79-8D34-889AAF623528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE2EA714-81E5-4B79-8D34-889AAF623528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE2EA714-81E5-4B79-8D34-889AAF623528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{915E8969-A93C-4F1B-B9A7-658DEC2DEF91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{915E8969-A93C-4F1B-B9A7-658DEC2DEF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{915E8969-A93C-4F1B-B9A7-658DEC2DEF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{915E8969-A93C-4F1B-B9A7-658DEC2DEF91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +49,8 @@ Global
 		{E80DE452-C25F-45FA-A57B-6234EE4DED83} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{DB0F4FBB-B02A-483A-954A-7743CE80D562} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{BA868D25-3BF1-4A5D-A09A-DFD4976A99D1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{DE2EA714-81E5-4B79-8D34-889AAF623528} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{915E8969-A93C-4F1B-B9A7-658DEC2DEF91} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {115AF8CB-C4DD-4181-BBB4-9437B82C5334}
