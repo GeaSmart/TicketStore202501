@@ -2,8 +2,7 @@
 
 namespace MusicStore.Repositories
 {
-    public interface IGenreRepository : IRepositoryBase<Genre>
+    public interface IConcertRepository : IRepositoryBase<Concert>
     {
-
     }
 }

@@ -9,15 +9,11 @@ namespace MusicStore.Persistence
         {
 
         }
-        //Fluent API
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Genre>().Property(x => x.Name).HasMaxLength(50);
+            base.OnModelCreating(modelBuilder);    
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
-
-        //Entities to tables
-        public DbSet<Genre> Genres { get; set; }
-
     }
 }
