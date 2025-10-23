@@ -1,5 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using MusicStore.Persistence.Configurations;
+using System;
 
 #nullable disable
 
@@ -70,6 +71,8 @@ namespace MusicStore.Persistence.Migrations
                 schema: "Musicales",
                 table: "Concert",
                 column: "Title");
+
+            migrationBuilder.Sql(StoredProcedureConfiguration.CreateSP);
         }
 
         /// <inheritdoc />
@@ -82,6 +85,8 @@ namespace MusicStore.Persistence.Migrations
             migrationBuilder.DropTable(
                 name: "Genre",
                 schema: "Musicales");
+
+            migrationBuilder.Sql(StoredProcedureConfiguration.DropSP);
         }
     }
 }

@@ -31,36 +31,8 @@ namespace MusicStore.Api.Controllers
         [HttpGet("title")]
         public async Task<IActionResult> Get(string? title)
         {
-            var response = new BaseResponseGeneric<ICollection<ConcertResponseDto>>();
-            try
-            {
-                //Mapping
-                var concertsDb = await repository.GetAsync(x => x.Title.Contains(title ?? string.Empty), x => x.DateEvent);
-
-                var concertsDto = concertsDb.Select(x => new ConcertResponseDto
-                {
-                    Title = x.Title,
-                    Description = x.Description,
-                    Place = x.Place,
-                    UnitPrice = x.UnitPrice,
-                    GenreId = x.GenreId,
-                    DateEvent = x.DateEvent,
-                    ImageUrl = x.ImageUrl,
-                    TicketsQuantity = x.TicketsQuantity,
-                    Finalized = x.Finalized
-                }).ToList();
-
-                response.Data = concertsDto;
-                response.Success = true;
-                logger.LogInformation("Obteniendo todos los conciertos.");
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                response.ErrorMessage = "Ocurrió un error al obtener la información.";
-                logger.LogError(ex, $"{response.ErrorMessage} {ex.Message}");
-                return BadRequest(response);
-            }
+            var concerts = await repository.GetAsync(title);
+            return Ok(concerts);
         }
 
         [HttpPost]

@@ -13,7 +13,7 @@ public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where T
         this.context = context;
     }
 
-    public async Task<ICollection<TEntity>> GetAsync()
+    public virtual async Task<ICollection<TEntity>> GetAsync()
     {
         return await context.Set<TEntity>()
             .AsNoTracking()
