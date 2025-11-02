@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MusicStore.Dto.Request;
-using MusicStore.Dto.Response;
-using MusicStore.Entities;
-using MusicStore.Repositories;
+using MusicStore.Services.Interfaces;
 
 namespace MusicStore.Api.Controllers
 {
@@ -10,69 +8,51 @@ namespace MusicStore.Api.Controllers
     [Route("api/[controller]")]
     public class ConcertsController : ControllerBase
     {
-        private readonly IConcertRepository repository;
-        private readonly IGenreRepository genreRepository;
-        private readonly ILogger<ConcertsController> logger;
+        private readonly IConcertService concertService;
 
-        public ConcertsController(IConcertRepository repository, IGenreRepository genreRepository, ILogger<ConcertsController> logger)
+        public ConcertsController(IConcertService concertService)
         {
-            this.repository = repository;
-            this.genreRepository = genreRepository;
-            this.logger = logger;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var concerts = await repository.GetAsync();
-            return Ok(concerts);
+            this.concertService = concertService;
         }
 
         [HttpGet("title")]
         public async Task<IActionResult> Get(string? title)
         {
-            var concerts = await repository.GetAsync(title);
-            return Ok(concerts);
+            var response = await concertService.GetAsync(title);
+            return response.Success ? Ok(response.Data) : BadRequest(response);
+        }
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var response = await concertService.GetAsync(id);
+            return response.Success ? Ok(response) : NotFound(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(ConcertRequestDto concertRequestDto)
+        public async Task<IActionResult> Post(ConcertRequestDto request)
         {
-            var response = new BaseResponseGeneric<int>();
+            var response = await concertService.AddAsync(request);
 
-            try
-            {
-                //validating genre id
-                var genre = await genreRepository.GetAsync(concertRequestDto.GenreId);
-                if (genre is null)
-                {
-                    response.ErrorMessage = $"El id del género {concertRequestDto.GenreId} es incorrecto.";
-                    logger.LogWarning(response.ErrorMessage);
-                    return BadRequest(response);
-                }
+            return response.Success ? Ok(response) : BadRequest(response);
+        }
 
-                //mapping
-                var concertDb = new Concert
-                {
-                    Title = concertRequestDto.Title,
-                    Description = concertRequestDto.Description,
-                    Place = concertRequestDto.Place,
-                    UnitPrice = concertRequestDto.UnitPrice,
-                    GenreId = concertRequestDto.GenreId,
-                    DateEvent = concertRequestDto.DateEvent,
-                    ImageUrl = concertRequestDto.ImageUrl,
-                    TicketsQuantity = concertRequestDto.TicketsQuantity
-                };
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Put(int id, ConcertRequestDto request)
+        {
+            var response = await concertService.UpdateAsync(id, request);
+            return response.Success ? Ok(response) : BadRequest(response);
+        }
 
-                response.Data = await repository.AddAsync(concertDb);
-                response.Success = true;
-            }
-            catch (Exception ex)
-            {
-                response.ErrorMessage = "Ocurrió un error al guardar la información.";
-                logger.LogError(ex, ex.Message);
-            }
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var response = await concertService.DeleteAsync(id);
             return Ok(response);
+        }
+        [HttpPatch("{id:int}")]
+        public async Task<IActionResult> Patch(int id)
+        {
+            return Ok(await concertService.FinalizeAsync(id));
         }
     }
 }

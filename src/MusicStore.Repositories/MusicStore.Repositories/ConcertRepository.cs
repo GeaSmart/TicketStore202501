@@ -46,30 +46,41 @@ namespace MusicStore.Repositories
             //    .ToListAsync();
 
             //lazy loading approach
-            //return await context.Set<Concert>()
-            //    .Where(x => x.Title.Contains(title ?? string.Empty))
-            //    .AsNoTracking()
-            //    .Select(x => new ConcertInfo
-            //    {
-            //        Id = x.Id,
-            //        Title = x.Title,
-            //        Description = x.Description,
-            //        Place = x.Place,
-            //        UnitPrice = x.UnitPrice,
-            //        Genre = x.Genre.Name,
-            //        GenreId = x.GenreId,
-            //        DateEvent = x.DateEvent.ToShortDateString(),
-            //        TimeEvent = x.DateEvent.ToShortTimeString(),
-            //        ImageUrl = x.ImageUrl,
-            //        TicketsQuantity = x.TicketsQuantity,
-            //        Finalized = x.Finalized,
-            //        Status = x.Status ? "Activo" : "Inactivo"
-            //    })
-            //    .ToListAsync();
+            return await context.Set<Concert>()
+                .Where(x => x.Title.Contains(title ?? string.Empty))
+                .IgnoreQueryFilters()
+                .AsNoTracking()
+                .Select(x => new ConcertInfo
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Description = x.Description,
+                    Place = x.Place,
+                    UnitPrice = x.UnitPrice,
+                    Genre = x.Genre.Name,
+                    GenreId = x.GenreId,
+                    DateEvent = x.DateEvent.ToShortDateString(),
+                    TimeEvent = x.DateEvent.ToShortTimeString(),
+                    ImageUrl = x.ImageUrl,
+                    TicketsQuantity = x.TicketsQuantity,
+                    Finalized = x.Finalized,
+                    Status = x.Status ? "Activo" : "Inactivo"
+                })
+                .ToListAsync();
 
             // Raw query approach
-            var query = context.Database.SqlQueryRaw<ConcertInfo>("usp_ListConcerts {0}", title ?? string.Empty);
-            return await query.ToListAsync();
+            //var query = context.Database.SqlQueryRaw<ConcertInfo>("usp_ListConcerts {0}", title ?? string.Empty);
+            //return await query.ToListAsync();
+        }
+
+        public async Task FinalizeAsync(int id)
+        {
+            var entity = await GetAsync(id);
+            if (entity is not null)
+            {
+                entity.Finalized = true;
+                await UpdateAsync();
+            }
         }
     }
 }
