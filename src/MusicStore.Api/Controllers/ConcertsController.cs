@@ -16,9 +16,9 @@ namespace MusicStore.Api.Controllers
         }
 
         [HttpGet("title")]
-        public async Task<IActionResult> Get(string? title)
+        public async Task<IActionResult> Get(string? title, [FromQuery] PaginationDTO pagination)
         {
-            var response = await concertService.GetAsync(title);
+            var response = await concertService.GetAsync(title, pagination);
             return response.Success ? Ok(response.Data) : BadRequest(response);
         }
         [HttpGet("{id:int}")]

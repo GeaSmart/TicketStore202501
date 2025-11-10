@@ -1,14 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using MusicStore.Dto.Request;
 using MusicStore.Entities;
 using MusicStore.Entities.Info;
 using MusicStore.Persistence;
+using MusicStore.Repositories.Utils;
 
 namespace MusicStore.Repositories
 {
     public class ConcertRepository : RepositoryBase<Concert>, IConcertRepository
     {
-        public ConcertRepository(ApplicationDbContext context) : base(context)
+        private readonly IHttpContextAccessor httpContext;
+
+        public ConcertRepository(ApplicationDbContext context, IHttpContextAccessor httpContext) : base(context)
         {
+            this.httpContext = httpContext;
         }
 
         //public override async Task<ICollection<Concert>> GetAsync()
@@ -20,7 +26,7 @@ namespace MusicStore.Repositories
         //        .ToListAsync();
         //}
 
-        public async Task<ICollection<ConcertInfo>> GetAsync(string? title)
+        public async Task<ICollection<ConcertInfo>> GetAsync(string? title, PaginationDTO pagination)
         {
             //eager loading approach optimizado
             //return await context.Set<Concert>()
@@ -46,7 +52,7 @@ namespace MusicStore.Repositories
             //    .ToListAsync();
 
             //lazy loading approach
-            return await context.Set<Concert>()
+            var queryable = context.Set<Concert>()
                 .Where(x => x.Title.Contains(title ?? string.Empty))
                 .IgnoreQueryFilters()
                 .AsNoTracking()
@@ -66,7 +72,12 @@ namespace MusicStore.Repositories
                     Finalized = x.Finalized,
                     Status = x.Status ? "Activo" : "Inactivo"
                 })
-                .ToListAsync();
+                .AsQueryable();
+
+
+            await httpContext.HttpContext.InsertarPaginacionHeader(queryable);
+            var response = await queryable.OrderBy(x => x.Id).Paginate(pagination).ToListAsync();
+            return response;
 
             // Raw query approach
             //var query = context.Database.SqlQueryRaw<ConcertInfo>("usp_ListConcerts {0}", title ?? string.Empty);
