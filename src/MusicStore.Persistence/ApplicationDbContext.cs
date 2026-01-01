@@ -17,6 +17,7 @@ namespace MusicStore.Persistence
             base.OnModelCreating(modelBuilder);    
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             modelBuilder.Ignore<ConcertInfo>();
+            modelBuilder.Ignore<ReportInfo>();
 
             modelBuilder.Entity<MusicStoreUserIdentity>(x => x.ToTable("User"));
             modelBuilder.Entity<IdentityRole>(x => x.ToTable("Role"));

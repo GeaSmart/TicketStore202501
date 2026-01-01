@@ -12,7 +12,8 @@ namespace MusicStore.Services.Profiles
         {
             CreateMap<ConcertInfo, ConcertResponseDto>(); //origin to destination
             CreateMap<ConcertRequestDto, Concert>()
-                .ForMember(d => d.DateEvent, o => o.MapFrom(x => Convert.ToDateTime($"{x.DateEvent} {x.TimeEvent}")));
+                .ForMember(d => d.DateEvent, o => o.MapFrom(x => Convert.ToDateTime($"{x.DateEvent} {x.TimeEvent}")))
+                .ForMember(d => d.ImageUrl, options => options.Ignore());
             CreateMap<Concert, ConcertResponseDto>()
                 .ForMember(d => d.DateEvent, o => o.MapFrom(x => x.DateEvent.ToShortDateString()))
                 .ForMember(d => d.TimeEvent, o => o.MapFrom(x => x.DateEvent.ToShortTimeString()))

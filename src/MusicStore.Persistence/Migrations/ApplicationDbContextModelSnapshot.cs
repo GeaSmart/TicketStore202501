@@ -173,6 +173,10 @@ namespace MusicStore.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("ExtendedDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Finalized")
                         .HasColumnType("bit");
 

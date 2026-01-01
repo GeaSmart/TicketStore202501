@@ -61,6 +61,7 @@ namespace MusicStore.Repositories
                     Id = x.Id,
                     Title = x.Title,
                     Description = x.Description,
+                    ExtendedDescription = x.ExtendedDescription,
                     Place = x.Place,
                     UnitPrice = x.UnitPrice,
                     Genre = x.Genre.Name,

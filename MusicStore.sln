@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Dto", "src\MusicStore.Dto\MusicStore.Dto.csproj", "{915E8969-A93C-4F1B-B9A7-658DEC2DEF91}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Services", "src\MusicStore.Services\MusicStore.Services.csproj", "{D697759C-B009-4D48-BC2F-3A525D6958E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7788F501-3851-4884-B326-13523003B629}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.UnitTests", "tests\MusicStore.UnitTests\MusicStore.UnitTests.csproj", "{B0BB24BB-8160-4169-92F4-16BEB3C3E5BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{D697759C-B009-4D48-BC2F-3A525D6958E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D697759C-B009-4D48-BC2F-3A525D6958E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D697759C-B009-4D48-BC2F-3A525D6958E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0BB24BB-8160-4169-92F4-16BEB3C3E5BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0BB24BB-8160-4169-92F4-16BEB3C3E5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0BB24BB-8160-4169-92F4-16BEB3C3E5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0BB24BB-8160-4169-92F4-16BEB3C3E5BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 		{DE2EA714-81E5-4B79-8D34-889AAF623528} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{915E8969-A93C-4F1B-B9A7-658DEC2DEF91} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{D697759C-B009-4D48-BC2F-3A525D6958E3} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{B0BB24BB-8160-4169-92F4-16BEB3C3E5BE} = {7788F501-3851-4884-B326-13523003B629}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {115AF8CB-C4DD-4181-BBB4-9437B82C5334}

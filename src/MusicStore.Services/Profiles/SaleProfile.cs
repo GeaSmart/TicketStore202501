@@ -2,6 +2,7 @@
 using MusicStore.Dto.Request;
 using MusicStore.Dto.Response;
 using MusicStore.Entities;
+using MusicStore.Entities.Info;
 using System.Globalization;
 
 namespace MusicStore.Services.Profiles;
@@ -13,6 +14,8 @@ public class SaleProfile : Profile
     {
         CreateMap<SaleRequestDto, Sale>()
             .ForMember(d => d.Quantity, o => o.MapFrom(x => x.TicketsQuantity));
+        
+        CreateMap<ReportInfo, SaleReportResponseDto>();
 
         CreateMap<Sale, SaleResponseDto>()
             .ForMember(d => d.SaleId, o => o.MapFrom(x => x.Id))

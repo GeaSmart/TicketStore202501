@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MusicStore.Dto.Request;
 using MusicStore.Services.Interfaces;
@@ -37,6 +38,7 @@ public class UsersController : ControllerBase
         var response = await service.RequestTokenToResetPasswordAsync(request);
         return response.Success ? Ok(response) : BadRequest(response);
     }
+
     [HttpPost("ResetPassword")]
     public async Task<IActionResult> ResetPassword(NewPasswordRequestDto request)
     {
@@ -45,6 +47,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("ChangePassword")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Authorize]
     public async Task<IActionResult> ChangePassword(ChangePasswordRequestDto request)
     {

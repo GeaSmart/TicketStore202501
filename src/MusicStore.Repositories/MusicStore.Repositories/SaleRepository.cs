@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MusicStore.Dto.Request;
 using MusicStore.Entities;
+using MusicStore.Entities.Info;
 using MusicStore.Persistence;
 using MusicStore.Repositories.Utils;
 using System.Data;
@@ -68,5 +69,19 @@ public class SaleRepository : RepositoryBase<Sale>, ISaleRepository
         await httpContextAccessor.HttpContext.InsertarPaginacionHeader(queryable);
         var response = await queryable.Paginate(pagination).ToListAsync();
         return response;
+    }
+
+    public async Task<ICollection<ReportInfo>> GetSaleReportAsync(DateTime dateStart, DateTime dateEnd)
+    {
+        var query = context.Database
+            .SqlQueryRaw<ReportInfo>(
+                @"SELECT c.Title AS ConcertName, SUM(s.Total) AS Total
+              FROM Musicales.Sale s
+              INNER JOIN Musicales.Concert c ON c.Id = s.ConcertId
+              WHERE s.SaleDate >= {0} AND s.SaleDate <= {1}
+              GROUP BY c.Title",
+                  dateStart, dateEnd);
+
+        return await query.ToListAsync();
     }
 }
